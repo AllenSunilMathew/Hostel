@@ -9,45 +9,102 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* Custom CSS */
+        :root {
+            --orange: #f97316;
+            --orange-light: #fef3c7;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
         .hero-section {
             background: linear-gradient(135deg, #fff7ed 0%, #fef3c7 100%);
             min-height: 80vh;
         }
-
+        
         .orange-line {
             width: 64px;
             height: 4px;
-            background-color: #f97316;
+            background-color: var(--orange);
             margin-top: 12px;
         }
-
-        .promo-section {
-            background: linear-gradient(135deg, #f97316 0%, #f59e0b 100%);
+        
+        .navbar {
+            transition: all 0.3s ease;
+            padding: 15px 0;
         }
-
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-logo {
+            width: 60px;
+            height: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            padding: 8px 12px !important;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        .hero-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Gallery Styles */
         .gallery-item {
             position: relative;
             overflow: hidden;
             border-radius: 12px;
             cursor: pointer;
+            margin-bottom: 1.5rem;
+            height: 0;
+            padding-bottom: 100%;
         }
-
+        
         .gallery-item img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             transition: transform 0.3s ease;
         }
-
+        
         .gallery-item:hover img {
             transform: scale(1.05);
         }
-
+        
         .gallery-overlay {
             position: absolute;
             top: 0;
@@ -61,61 +118,136 @@
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
+        
         .gallery-item:hover .gallery-overlay {
             opacity: 1;
         }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
+        
+        /* Contact Section */
+        .contact-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
-
-        /* Active nav link */
-        .nav-link.active {
-            color: #f97316 !important;
-            font-weight: 600;
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+        
+        footer a {
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: var(--orange) !important;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background: var(--orange);
+            transform: translateY(-3px);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 576px) {
+            .hero-section {
+                min-height: auto;
+                padding: 60px 0;
+            }
+            
+            .display-4 {
+                font-size: 2.2rem;
+            }
+            
+            .navbar-logo {
+                width: 50px;
+            }
+            
+            .btn-lg {
+                padding: 0.5rem 1rem;
+                font-size: 1rem;
+            }
+        }
+        
+        @media (min-width: 576px) and (max-width: 768px) {
+            .display-4 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 992px) {
+            .display-4 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (min-width: 992px) and (max-width: 1200px) {
+            .display-4 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (min-width: 1200px) and (max-width: 1400px) {
+            .display-4 {
+                font-size: 3.2rem;
+            }
+        }
+        
+        @media (min-width: 1400px) {
+            .display-4 {
+                font-size: 3.5rem;
+            }
         }
     </style>
 </head>
 
 <body>
     <!-- Header -->
-    <header class="navbar navbar-expand navbar-light bg-white shadow-sm sticky-top">
+    <header class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#home">
-                <div class="bg-orange-500 rounded-lg p-2 me-3">
-                    <div class="w-4 h-4 bg-white rounded-sm"></div>
-                </div>
-                <span class="fw-bold text-gray-900 fs-5">Amal's Gents Hostel</span>
+                <img src="./images/Green Minimalist Home Logo .png" alt="Logo" class="navbar-logo me-2">
+                <span class="fw-bold text-gray-900 fs-5 d-none d-sm-block">Amal's Gents Hostel</span>
             </a>
 
-            <div class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="./about.html" class="nav-link" href="#location">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#gallery">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#location">Location</a>
-                </li>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>
+                </ul>
             </div>
         </div>
     </header>
 
-
     <!-- Hero Section -->
     <section id="home" class="hero-section py-5">
-        <div class="container py-5">
+        <div class="container py-5 mt-5">
             <div class="row align-items-center g-5">
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-lg-1 order-2">
                     <div class="hero-content">
                         <h1 class="display-4 fw-bold text-gray-900 mb-4">
                             "Hostel life: where strangers become friends and every day is an adventure."
@@ -123,39 +255,29 @@
                         <div class="d-flex align-items-start mb-4">
                             <div class="orange-line me-4"></div>
                             <p class="fs-5 text-gray-600">
-                                A timeless favorite—perfect for capturing the magic of new connections and unexpected
-                                joys.
+                                A timeless favorite—perfect for capturing the magic of new connections and unexpected joys.
                             </p>
                         </div>
                         <div class="d-flex flex-column flex-sm-row gap-3">
-                            <!-- WhatsApp button -->
                             <a href="https://wa.me/+918943458313?text=Hello%20Amal%27s%20Gents%20Hostel%2C%20I%27d%20like%20to%20book%20a%20room."
-                                target="_blank" rel="noopener">
-                                <button class="btn btn-success btn-lg px-4 py-3">
-                                    Book Here
-                                </button>
+                                target="_blank" rel="noopener" class="btn btn-success btn-lg px-4 py-3">
+                                Book Here
                             </a>
-                            <a href="./gallery.html"> <button class="btn btn-danger btn-lg px-4 py-3 ">View
-                                    Our space</button></a>
-
-                            <!-- SMS button -->
-                            <a
-                                href="sms:+91 89434 58313?&body=Hello%20Amal%27s%20Gents%20Hostel%2C%20I%27d%20like%20to%20book%20a%20room.">
-                                <button class="btn btn-outline-primary btn-lg px-4 py-3">
-                                    Send SMS
-                                </button>
+                            <a href="./gallery.html" class="btn btn-danger btn-lg px-4 py-3">View Our space</a>
+                            <a href="sms:+91 89434 58313?&body=Hello%20Amal%27s%20Gents%20Hostel%2C%20I%27d%20like%20to%20book%20a%20room."
+                                class="btn btn-outline-primary btn-lg px-4 py-3 d-none d-md-inline-block">
+                                Send SMS
                             </a>
                         </div>
-
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-6 order-lg-2 order-1">
                     <div class="position-relative">
                         <div class="hero-image">
                             <img src="./images/WhatsApp Image 2025-06-22 at 21.28.25_252524ad.jpg"
-                                alt="Hostel exterior view" class="img-fluid rounded-3 shadow">
+                                alt="Hostel exterior view" class="img-fluid w-100">
                         </div>
-                        <div class="bg-white p-4 rounded-3 shadow-lg position-absolute bottom-0 start-0 mb-4 ms-4">
+                        <div class="bg-white p-3 p-sm-4 rounded-3 shadow-lg position-absolute bottom-0 start-0 mb-3 mb-sm-4 ms-3 ms-sm-4">
                             <div class="d-flex align-items-center mb-2">
                                 <div class="text-warning me-2">
                                     <i class="fas fa-star"></i>
@@ -183,7 +305,7 @@
             </div>
 
             <div class="row g-4">
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="gallery-item">
                         <img src="./images/WhatsApp Image 2025-06-22 at 21.28.23_821dbbb1.jpg" alt="Hostel room"
                             class="img-fluid rounded-3">
@@ -192,7 +314,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="gallery-item">
                         <img src="./images/WhatsApp Image 2025-06-22 at 21.28.21_df422399.jpg" alt="Hostel common area"
                             class="img-fluid rounded-3">
@@ -201,7 +323,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="gallery-item">
                         <img src="./images/WhatsApp Image 2025-06-22 at 21.28.21_5f5cead7.jpg" alt="Hostel kitchen"
                             class="img-fluid rounded-3">
@@ -210,7 +332,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="gallery-item">
                         <img src="./images/WhatsApp Image 2025-06-22 at 21.28.20_33f43963.jpg" alt="Hostel exterior"
                             class="img-fluid rounded-3">
@@ -219,8 +341,7 @@
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="gallery-item">
                         <img src="./images/WhatsApp Image 2025-06-22 at 21.28.22_790bd41b.jpg" alt="Hostel bedroom"
                             class="img-fluid rounded-3">
@@ -229,7 +350,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                     <div class="gallery-item">
                         <img src="./images/WhatsApp Image 2025-06-22 at 21.28.25_cd7af966.jpg" alt="Hostel bathroom"
                             class="img-fluid rounded-3">
@@ -252,8 +373,8 @@
 
             <div class="row g-4">
                 <div class="col-lg-6">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-5">
+                    <div class="card border-0 shadow-sm h-100 contact-card">
+                        <div class="card-body p-4 p-md-5">
                             <h3 class="fw-bold mb-4">Send us a message</h3>
                             <form>
                                 <div class="mb-3">
@@ -272,14 +393,14 @@
                                     <label for="message" class="form-label">Message</label>
                                     <textarea class="form-control" id="message" rows="4" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary">Send Message</button>
+                                <button type="submit" class="btn btn-primary w-100">Send Message</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-5">
+                    <div class="card border-0 shadow-sm h-100 contact-card">
+                        <div class="card-body p-4 p-md-5">
                             <h3 class="fw-bold mb-4">Contact Information</h3>
                             <div class="mb-4">
                                 <div class="d-flex align-items-center mb-3">
@@ -289,7 +410,6 @@
                                     <div>
                                         <h5 class="fw-bold text-gray-900 mb-1">Phone</h5>
                                         <p class="text-gray-600 mb-0">+91 89434 58313</p>
-                                        <!-- <p class="text-gray-600 mb-0">(650) 382-5020</p> -->
                                     </div>
                                 </div>
                             </div>
@@ -318,22 +438,18 @@
                                 </div>
                             </div>
                             <div class="d-flex gap-3 mt-4">
-                                <a href="#" class="bg-secondary rounded-3 p-3 text-white text-decoration-none">
+                                <a href="#" class="social-icon text-white">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
-                                <a href="#" class="bg-secondary rounded-3 p-3 text-white text-decoration-none">
+                                <a href="#" class="social-icon text-white">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a href="#" class="bg-secondary rounded-3 p-3 text-white text-decoration-none">
+                                <a href="#" class="social-icon text-white">
                                     <i class="fab fa-twitter"></i>
                                 </a>
                                 <a href="https://wa.me/918943458313?text=Hello I Am Intersted In Booking Rooms"
-                                    target="_blank" class="bg-secondary rounded-3 p-3 text-white text-decoration-none">
+                                    target="_blank" class="social-icon text-white">
                                     <i class="fab fa-whatsapp"></i>
-                                </a>
-
-                                </a>
-
                                 </a>
                             </div>
                         </div>
@@ -353,8 +469,8 @@
 
             <div class="row g-4">
                 <div class="col-lg-6">
-                    <div class="card border-0 shadow-sm h-100">
-                        <div class="card-body p-5">
+                    <div class="card border-0 shadow-sm h-100 contact-card">
+                        <div class="card-body p-4 p-md-5">
                             <h3 class="fw-bold mb-4">Address</h3>
                             <div class="d-flex align-items-start mb-4">
                                 <div class="bg-orange-100 rounded-3 p-3 me-4">
@@ -362,9 +478,8 @@
                                 </div>
                                 <div>
                                     <h5 class="fw-bold text-gray-900 mb-1">Amal's Gents Hostel</h5>
-                                    <p class="text-gray-600 mb-0">54826 Fadel Circles</p>
-                                    <p class="text-gray-600 mb-0">Darrylstad, AZ 90995</p>
-                                    <p class="text-gray-600 mb-0">United States</p>
+                                    <p class="text-gray-600 mb-0">2/61, Thuthiyoor Rd, Thuthiyoor</p>
+                                    <p class="text-gray-600 mb-0">Kochi, Kakkanad, Kerala 682030</p>
                                 </div>
                             </div>
 
@@ -397,13 +512,12 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <div class="card border-0 shadow-sm h-100">
+                    <div class="card border-0 shadow-sm h-100 contact-card">
                         <div class="card-body p-0">
-                            <!-- Map placeholder - replace with actual map embed -->
                             <div class="ratio ratio-16x9">
                                 <iframe
                                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3929.156081075562!2d76.33910589999999!3d10.003963299999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d0049af570b%3A0xf1af1506effbc5aa!2sAMAL%20GENTS%20HOSTEL!5e0!3m2!1sen!2sin!4v1750609793997!5m2!1sen!2sin"
-                                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                                    style="border:0;" allowfullscreen="" loading="lazy"
                                     referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </div>
                         </div>
@@ -414,101 +528,60 @@
     </section>
 
     <!-- Footer -->
-    <style>
-        footer {
-            background-color: #000;
-            /* Black background */
-            color: #fff;
-            /* White text */
-        }
-
-        footer h5,
-        footer p,
-        footer a {
-            color: #fff !important;
-        }
-
-        footer .text-muted {
-            color: #ccc !important;
-            /* Soft grey */
-        }
-
-        footer .form-control {
-            background-color: #222;
-            border: 1px solid #444;
-            color: #fff;
-        }
-
-        footer .form-control::placeholder {
-            color: #aaa;
-        }
-
-        footer .btn-primary {
-            background-color: #e11d48;
-            border-color: #e11d48;
-        }
-
-        .border-secondary {
-            border-color: #444 !important;
-        }
-    </style>
-
     <footer class="py-5">
         <div class="container py-4">
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4">
                     <div class="d-flex align-items-center mb-4">
-                        <div class="bg-orange-500 rounded-lg p-2 me-3">
-                            <div class="w-4 h-4 bg-white rounded-sm"></div>
-                        </div>
+                        <img src="./images/Green Minimalist Home Logo .png" alt="Logo" class="navbar-logo me-3">
                         <h5 class="fw-bold mb-0">Amal's Gents Hostel</h5>
                     </div>
-                    <p class="text-muted">
+                    <p class="">
                         Creating memorable experiences for travelers from around the world. Your home away from home.
                     </p>
                 </div>
                 <div class="col-md-6 col-lg-2">
                     <h5 class="fw-bold mb-4">Quick Links</h5>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#home" class="text-muted text-decoration-none">Home</a></li>
-                        <li class="mb-2"><a href="#gallery" class="text-muted text-decoration-none">Gallery</a></li>
-                        <li class="mb-2"><a href="#contact" class="text-muted text-decoration-none">Contact</a></li>
-                        <li class="mb-2"><a href="#location" class="text-muted text-decoration-none">Location</a></li>
+                        <li class="mb-2"><a href="#home" class=" text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#gallery" class=" text-decoration-none">Gallery</a></li>
+                        <li class="mb-2"><a href="#contact" class=" text-decoration-none">Contact</a></li>
+                        <li class="mb-2"><a href="#location" class=" text-decoration-none">Location</a></li>
                     </ul>
                 </div>
                 <div class="col-md-6 col-lg-3">
                     <h5 class="fw-bold mb-4">Contact Info</h5>
-                    <div class="text-muted">
-                        <p class="mb-1">
-
-                            AMAL GENTS HOSTEL</p>
-                        <p class="mb-1">
-                            12/61, Thuthiyoor Rd, Thuthiyoor</p>
+                    <div class="">
+                        <p class="mb-1">AMAL GENTS HOSTEL</p>
+                        <p class="mb-1">12/61, Thuthiyoor Rd, Thuthiyoor</p>
                         <p class="mb-1">Kochi, Kakkanad, Kerala 682030</p>
-                        <p class="mb-1">contact@amalshostel.com</p>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <h5 class="fw-bold mb-4">Newsletter</h5>
-                    <p class="text-muted mb-3">Subscribe to get updates and offers</p>
-                    <form class="d-flex">
-                        <input type="email" class="form-control me-2" placeholder="Your email">
-                        <button class="btn btn-primary" type="submit">Subscribe</button>
-                    </form>
-                </div>
+                
             </div>
             <hr class="border-secondary my-5">
-            <div class="text-center text-muted">
-                <p class="mb-0">&copy; 2024 Amal's Gents Hostel. All rights reserved.</p>
+            <div class="text-center ">
+                <p class="mb-0">&copy; 2025 Amal's Gents Hostel. All rights reserved.</p>
             </div>
         </div>
     </footer>
-
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                document.querySelector('.navbar-logo').style.width = '50px';
+            } else {
+                navbar.classList.remove('scrolled');
+                document.querySelector('.navbar-logo').style.width = '60px';
+            }
+        });
+
         // Highlight active nav link on scroll
         const sections = document.querySelectorAll('section');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -535,7 +608,7 @@
 
         // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
                 e.preventDefault();
 
                 const targetId = this.getAttribute('href');
@@ -558,7 +631,7 @@
 
         // Gallery image click handler
         document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function () {
+            item.addEventListener('click', function() {
                 const imgSrc = this.querySelector('img').src;
                 const imgAlt = this.querySelector('img').alt;
 
@@ -588,5 +661,4 @@
         });
     </script>
 </body>
-
 </html>
