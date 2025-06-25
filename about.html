@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Amal's Gents Hostel</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --orange: #f97316;
+            --orange-light: #fef3c7;
+            --gray-dark: #1a1a1a;
+            --gray-light: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+        
+        /* Navbar */
+        .navbar {
+            transition: all 0.3s ease;
+            padding: 15px 0;
+        }
+        
+        .navbar.scrolled {
+            padding: 10px 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-logo {
+            width: 60px;
+            height: auto;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            position: relative;
+            padding: 8px 12px !important;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--orange);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after,
+        .nav-link.active:after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .about-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('./images/hostel-building.jpg') no-repeat center center;
+            background-size: cover;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            color: white;
+        }
+        
+        /* Mission Cards */
+        .mission-card {
+            border-left: 4px solid var(--orange);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .mission-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Team Members */
+        .team-member {
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .team-member:hover {
+            transform: scale(1.03);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--orange);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.3rem;
+            top: 0.5rem;
+            width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 50%;
+            background: var(--orange);
+            border: 3px solid white;
+        }
+        
+        /* Values Icons */
+        .values-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--orange-light);
+            margin: 0 auto 1rem;
+            color: var(--orange);
+            font-size: 1.5rem;
+        }
+        
+        /* Testimonials */
+        .testimonial-card {
+            height: 100%;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            background-color: var(--orange);
+            color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--gray-dark);
+            color: white;
+        }
+        
+        footer a {
+            transition: color 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: var(--orange) !important;
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 767.98px) {
+            .about-hero {
+                min-height: 50vh;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .timeline {
+                padding-left: 2rem;
+            }
+            
+            .timeline-item::before {
+                left: -2.5rem;
+            }
+            
+            .team-member img {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .mission-card,
+            .team-member,
+            .testimonial-card {
+                margin-bottom: 1.5rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .about-hero {
+                min-height: 40vh;
+                text-align: center;
+                padding: 60px 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.75rem;
+            }
+            
+            .navbar-brand span {
+                font-size: 1rem;
+            }
+            
+            .navbar-logo {
+                width: 40px;
+            }
+            
+            .values-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.25rem;
+            }
+            
+            .display-5 {
+                font-size: 2rem;
+            }
+            
+            .lead {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            .display-5 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .display-5 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (min-width: 992px) and (max-width: 1199.98px) {
+            .display-5 {
+                font-size: 2.8rem;
+            }
+        }
+        
+        @media (min-width: 1200px) and (max-width: 1399.98px) {
+            .display-5 {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (min-width: 1400px) {
+            .display-5 {
+                font-size: 3.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <header class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="./images/Green Minimalist Home Logo .png" alt="Logo" class="navbar-logo me-2 me-lg-3">
+                <span class="fw-bold text-gray-900 fs-5 d-none d-sm-inline">Amal's Gents Hostel</span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#gallery">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#location">Location</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-12 col-lg-8 mx-auto text-center">
+                    <h1 class="display-4 fw-bold mb-3 mb-md-4">About Amal's Gents Hostel</h1>
+                    <p class="lead mb-0">Providing a safe, comfortable home away from home since 2023</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story Section -->
+    <section class="py-4 py-md-5 bg-light">
+        <div class="container py-3 py-md-5">
+            <div class="row align-items-center g-4 g-lg-5">
+                <div class="col-lg-6 order-lg-1">
+                    <div class="position-relative">
+                        <img src="./images/WhatsApp Image 2025-06-22 at 21.28.20_33f43963.jpg" alt="Our hostel in early days"
+                            class="img-fluid rounded-3 shadow w-100">
+                        <div class="position-absolute bottom-0 start-0 bg-white p-2 p-md-3 m-2 m-md-3 rounded shadow-sm">
+                            <p class="mb-0 fw-bold small">Our Evening View</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 order-lg-0">
+                    <h2 class="fw-bold mb-3 mb-md-4">Our Story</h2>
+                    <div class="mb-3 mb-md-4">
+                        <div class="w-16 h-1 bg-orange mb-2 mb-md-3"></div>
+                        <p class="lead mb-0">Founded in 2010 by Mr. Amal Kumar, our hostel began as a small 10-room facility
+                            with a vision to provide affordable yet quality accommodation for students and working
+                            professionals.</p>
+                    </div>
+                    <p class="text-gray-600 mb-2 mb-md-3">What started as a modest venture has now grown into one of the most trusted
+                        hostel names in the region. Over the years, we've expanded our facilities, improved our
+                        services, and most importantly, built a community that feels like family.</p>
+                    <p class="text-gray-600 mb-0">Today, we house over 200 residents with modern amenities while maintaining
+                        the personal touch that made us successful in the first place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="py-4 py-md-5 bg-white">
+        <div class="container py-3 py-md-5">
+            <div class="text-center mb-4 mb-md-5">
+                <h2 class="display-5 fw-bold text-gray-900">Our Mission & Vision</h2>
+                <p class="fs-5 text-gray-600 mb-0">Guiding principles that shape everything we do</p>
+            </div>
+
+            <div class="row g-3 g-md-4">
+                <div class="col-md-6">
+                    <div class="mission-card p-3 p-md-4 bg-light rounded-3">
+                        <div class="d-flex align-items-center mb-2 mb-md-3">
+                            <div class="bg-orange text-white rounded-3 p-2 p-md-3 me-3 me-md-4">
+                                <i class="fas fa-bullseye fs-4"></i>
+                            </div>
+                            <h3 class="fw-bold mb-0 h5">Our Mission</h3>
+                        </div>
+                        <p class="text-gray-600 mb-2">To provide safe, affordable, and comfortable accommodation that fosters
+                            community, personal growth, and academic/professional success for all our residents.</p>
+                        <p class="text-gray-600 mb-0">We commit to maintaining clean facilities, offering nutritious food
+                            options, and creating an environment conducive to both study and relaxation.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mission-card p-3 p-md-4 bg-light rounded-3">
+                        <div class="d-flex align-items-center mb-2 mb-md-3">
+                            <div class="bg-orange text-white rounded-3 p-2 p-md-3 me-3 me-md-4">
+                                <i class="fas fa-eye fs-4"></i>
+                            </div>
+                            <h3 class="fw-bold mb-0 h5">Our Vision</h3>
+                        </div>
+                        <p class="text-gray-600 mb-2">To be recognized as the premier hostel that transforms temporary stays
+                            into lifelong relationships and memories, while setting the standard for quality student
+                            housing.</p>
+                        <p class="text-gray-600 mb-0">We aim to expand our reach while maintaining our core values of
+                            integrity, community, and excellence in service.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="py-4 py-md-5 bg-light">
+        <div class="container py-3 py-md-5">
+            <div class="text-center mb-4 mb-md-5">
+                <h2 class="display-5 fw-bold text-gray-900">Our Core Values</h2>
+                <p class="fs-5 text-gray-600 mb-0">The foundation of everything we do</p>
+            </div>
+
+            <div class="row g-3 g-md-4">
+                <div class="col-6 col-md-4 col-lg-2 col-xl-2">
+                    <div class="text-center p-2 p-md-3">
+                        <div class="values-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 mb-md-3 h6">Community</h4>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 col-xl-2">
+                    <div class="text-center p-2 p-md-3">
+                        <div class="values-icon">
+                            <i class="fas fa-broom"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 mb-md-3 h6">Cleanliness</h4>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 col-xl-2">
+                    <div class="text-center p-2 p-md-3">
+                        <div class="values-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 mb-md-3 h6">Care</h4>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 col-xl-2">
+                    <div class="text-center p-2 p-md-3">
+                        <div class="values-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 mb-md-3 h6">Innovation</h4>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 col-xl-2">
+                    <div class="text-center p-2 p-md-3">
+                        <div class="values-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 mb-md-3 h6">Integrity</h4>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2 col-xl-2">
+                    <div class="text-center p-2 p-md-3">
+                        <div class="values-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4 class="fw-bold mb-2 mb-md-3 h6">Safety</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="bg-white p-3 p-md-4 rounded-3">
+                        <p class="text-center mb-0">These values guide our daily operations and decision-making, ensuring we provide the best possible experience for our residents.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="py-4 py-md-5 bg-white">
+        <div class="container py-3 py-md-5">
+            <div class="text-center mb-4 mb-md-5">
+                <h2 class="display-5 fw-bold text-gray-900">Our Journey</h2>
+                <p class="fs-5 text-gray-600 mb-0">Milestones in our growth and development</p>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4 class="fw-bold h5">2023 Jan - Humble Beginnings</h4>
+                            <p class="text-gray-600 small">Amal's Gents Hostel opens with just 10 rooms in a small building,
+                                serving local college students.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fw-bold h5">2023 Mar - First Expansion</h4>
+                            <p class="text-gray-600 small">We acquire the adjacent property, doubling our capacity to 20 rooms
+                                and adding a common study area.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fw-bold h5">2023 Dec - Dining Services</h4>
+                            <p class="text-gray-600 small">We launch our in-house mess service providing nutritious, homestyle
+                                meals to residents.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4 class="fw-bold h5">2023 Dec - Current Facility</h4>
+                            <p class="text-gray-600 small">Opened our new wing with premium rooms, and a rooftop View.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="py-4 py-md-5 bg-light">
+        <div class="container py-3 py-md-5">
+            <div class="text-center mb-4 mb-md-5">
+                <h2 class="display-5 fw-bold text-gray-900">Meet Our Team</h2>
+                <p class="fs-5 text-gray-600 mb-0">The people who make it all happen</p>
+            </div>
+
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="team-member text-center bg-white p-3 p-md-4 rounded-3 shadow-sm">
+                        <div class="mx-auto mb-3" style="width: 120px; height: 120px; background-color: #f0f0f0; border-radius: 50%;"></div>
+                        <h4 class="fw-bold mb-1 h5">Lissy</h4>
+                        <p class="text-orange mb-2 small">Founder & Director</p>
+                        <p class="text-gray-600 small">With over 20 years, Amal's vision continues to guide our
+                            hostel's growth and community spirit.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="team-member text-center bg-white p-3 p-md-4 rounded-3 shadow-sm">
+                        <div class="mx-auto mb-3" style="width: 120px; height: 120px; background-color: #f0f0f0; border-radius: 50%;"></div>
+                        <h4 class="fw-bold mb-1 h5">Thomas</h4>
+                        <p class="text-orange mb-2 small">General Manager</p>
+                        <p class="text-gray-600 small">Oversees daily operations with a focus on resident satisfaction and
+                            facility maintenance.</p>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4">
+                    <div class="team-member text-center bg-white p-3 p-md-4 rounded-3 shadow-sm">
+                        <div class="mx-auto mb-3" style="width: 120px; height: 120px; background-color: #f0f0f0; border-radius: 50%;"></div>
+                        <h4 class="fw-bold mb-1 h5">Amal</h4>
+                        <p class="text-orange mb-2 small">Asst.Manager</p>
+                        <p class="text-gray-600 small">Creates a good working environment for all residents and staff.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4 mt-md-5">
+                <p class="lead small">Our dedicated support staff of 15 ensures clean facilities, prompt maintenance, and
+                    security.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-4 py-md-5 bg-white">
+        <div class="container py-3 py-md-5">
+            <div class="text-center mb-4 mb-md-5">
+                <h2 class="display-5 fw-bold text-gray-900">What Our Residents Say</h2>
+                <p class="fs-5 text-gray-600 mb-0">Hear from those who've made our hostel their home</p>
+            </div>
+
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testimonial-card bg-light p-3 p-md-4 rounded-3">
+                        <div class="d-flex align-items-center mb-2 mb-md-3">
+                            <div class="text-warning me-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="fst-italic mb-3 small">"Living at Amal's Hostel transformed my college experience. The
+                            community here is like family, and the facilities are always clean and well-maintained."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="me-3" style="width: 40px; height: 40px; background-color: #e0e0e0; border-radius: 50%;"></div>
+                            <div>
+                                <h6 class="fw-bold mb-0 small">Arjun M.</h6>
+                                <small class="text-muted">Resident</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testimonial-card bg-light p-3 p-md-4 rounded-3">
+                        <div class="d-flex align-items-center mb-2 mb-md-3">
+                            <div class="text-warning me-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        <p class="fst-italic mb-3 small">"As an international student, I was nervous about finding good
+                            accommodation. Amal's Hostel provided not just a room, but a supportive community that
+                            helped me adjust."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="me-3" style="width: 40px; height: 40px; background-color: #e0e0e0; border-radius: 50%;"></div>
+                            <div>
+                                <h6 class="fw-bold mb-0 small">Aswin AnilKumar</h6>
+                                <small class="text-muted">Resident</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="testimonial-card bg-light p-3 p-md-4 rounded-3">
+                        <div class="d-flex align-items-center mb-2 mb-md-3">
+                            <div class="text-warning me-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        <p class="fst-italic mb-3 small">"The location is perfect, the food is excellent, and the staff
+                            genuinely care about residents. I've recommended Amal's to all my friends."</p>
+                        <div class="d-flex align-items-center">
+                            <div class="me-3" style="width: 40px; height: 40px; background-color: #e0e0e0; border-radius: 50%;"></div>
+                            <div>
+                                <h6 class="fw-bold mb-0 small">Vikram S.</h6>
+                                <small class="text-muted">Former Resident</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-4 py-md-5 cta-section">
+        <div class="container py-3 py-md-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8 text-center text-lg-start mb-3 mb-lg-0">
+                    <h2 class="fw-bold mb-2 h3">Ready to Experience Amal's Hostel?</h2>
+                    <p class="lead mb-0">Join our community of happy residents today.</p>
+                </div>
+                <div class="col-lg-4 text-center text-lg-end">
+                    <a href="index.html#contact" class="btn btn-light btn-lg px-3 px-md-4 py-2 py-md-3">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-4 py-md-5">
+        <div class="container py-3 py-md-4">
+            <div class="row g-3 g-md-4">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="d-flex align-items-center mb-3 mb-md-4">
+                        <img src="./images/Green Minimalist Home Logo .png" alt="Logo" class="navbar-logo me-3">
+                        <h5 class="fw-bold mb-0 text-white">Amal's Gents Hostel</h5>
+                    </div>
+                    <p class="text- small">
+                        Creating memorable experiences for travelers from around the world. Your home away from home.
+                    </p>
+                </div>
+                <div class="col-6 col-md-3 col-lg-2">
+                    <h5 class="fw-bold mb-2 mb-md-3 text-white h6">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-1 mb-md-2"><a href="index.html" class=" text-decoration-none small text-white ">Home</a></li>
+                        <li class="mb-1 mb-md-2"><a href="about.html" class="ttext-decoration-none small text-white">About</a></li>
+                        <li class="mb-1 mb-md-2"><a href="index.html#gallery"
+                                class=" text-decoration-none small text-white">Gallery</a></li>
+                        <li class="mb-1 mb-md-2"><a href="index.html#contact"
+                                class=" text-decoration-none small text-white">Contact</a></li>
+                        <li class="mb-1 mb-md-2"><a href="index.html#location"
+                                class=" text-decoration-none small text-white">Location</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3 col-lg-3 ">
+                    <h5 class="fw-bold mb-2 mb-md-3 text-white h6">Contact Info</h5>
+                    <div class="text-muted small">
+                        <p class="mb-1 text-white">AMAL GENTS HOSTEL</p>
+                        <p class="mb-1 text-white">12/61, Thuthiyoor Rd, Thuthiyoor</p>
+                        <p class="mb-1 text-white">Kochi, Kakkanad, Kerala 682030</p>
+                    </div>
+                </div>
+                
+            </div>
+            <hr class="border-secondary my-4 my-md-5">
+            <div class="text-center ">
+                <p class="mb-0 small">&copy; 2025 Amal's Gents Hostel. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                document.querySelector('.navbar-logo').style.width = '50px';
+            } else {
+                navbar.classList.remove('scrolled');
+                document.querySelector('.navbar-logo').style.width = '60px';
+            }
+        });
+
+        // Activate the current nav link
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentPage = window.location.pathname.split('/').pop();
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            navLinks.forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
