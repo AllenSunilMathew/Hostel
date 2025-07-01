@@ -210,21 +210,6 @@
             display: block;
         }
 
-        /* Custom Alert Styles */
-        .custom-alert {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1100;
-            display: none;
-        }
-
-        .alert-success-custom {
-            background-color: #d1fae5;
-            color: #065f46;
-            border-left: 4px solid #10b981;
-        }
-
         /* Responsive Adjustments */
         @media (max-width: 576px) {
             .hero-section {
@@ -285,18 +270,25 @@
             });
         })();
     </script>
+
+    <script>
+        function sendMail() {
+            let parms = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                phoneNumber: document.getElementById("phone").value,
+                message: document.getElementById("message").value
+            }
+            emailjs.send("service_0rjdkqk", "template_bechh4p", parms).then(alert("Email sent Succesfully"))
+        }
+    </script>
+
+
+
+
 </head>
 
 <body>
-    <!-- Custom Alert -->
-    <div id="successAlert" class="custom-alert alert alert-success-custom alert-dismissible fade show" role="alert">
-        <div class="d-flex align-items-center">
-            <i class="fas fa-check-circle me-2" style="color: #10b981;"></i>
-            <strong>Success!</strong> Your message has been sent successfully.
-        </div>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-
     <!-- Header -->
     <header class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div class="container">
@@ -320,6 +312,8 @@
             </div>
         </div>
     </header>
+
+
 
     <!-- Hero Section -->
     <section id="home" class="hero-section py-5">
@@ -456,7 +450,7 @@
                     <div class="card border-0 shadow-sm h-100 contact-card">
                         <div class="card-body p-4 p-md-5">
                             <h3 class="fw-bold mb-4">Send us a message</h3>
-                            <form id="contactForm">
+                            <form>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Your Name</label>
                                     <input type="text" class="form-control" id="name" required>
@@ -473,7 +467,8 @@
                                     <label for="message" class="form-label">Message</label>
                                     <textarea class="form-control" id="message" rows="4" required></textarea>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                                <button type="submit" onclick="sendMail()" class="btn btn-primary w-100">Send
+                                    Message</button>
                             </form>
                         </div>
                     </div>
@@ -518,7 +513,11 @@
                                     </div>
 
                                 </div>
+                                <div>
+                                    <h5 class="fw-bold text-gray-900 mb-1">Email</h5>
+                                    <p class="text-gray-600 mb-0">amalgentshostel@gmail.com</p>
 
+                                </div>
                             </div>
 
                             <div class="d-flex gap-3 mt-4">
@@ -756,38 +755,6 @@
                         document.body.removeChild(modalContainer);
                     });
                 });
-            });
-
-            // Contact form submission
-            const contactForm = document.getElementById('contactForm');
-            const successAlert = document.getElementById('successAlert');
-
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                let parms = {
-                    name: document.getElementById("name").value,
-                    email: document.getElementById("email").value,
-                    phoneNumber: document.getElementById("phone").value,
-                    message: document.getElementById("message").value
-                }
-                
-                emailjs.send("service_0rjdkqk", "template_bechh4p", parms)
-                    .then(function() {
-                        // Show success alert
-                        successAlert.style.display = 'block';
-                        
-                        // Hide alert after 5 seconds
-                        setTimeout(() => {
-                            successAlert.style.display = 'none';
-                        }, 5000);
-                        
-                        // Reset form
-                        contactForm.reset();
-                    }, function(error) {
-                        alert('Failed to send message. Please try again later.');
-                        console.error('EmailJS error:', error);
-                    });
             });
         });
     </script>
