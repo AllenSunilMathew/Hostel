@@ -266,7 +266,7 @@
     </style>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
-        emailjs.init("public id"); // Your EmailJS public key
+        emailjs.init("BQm-3mgvCXGmu8Eui"); // Your EmailJS public key
 
         function sendMail() {
             const parms = {
@@ -276,7 +276,7 @@
                 message: document.getElementById("message").value
             };
 
-            emailjs.send("service_id", "template id", parms)
+            emailjs.send("service_fhza4p1", "template_bechh4p", parms)
                 .then(function (response) {
                     // ✅ Show success alert
                     Swal.fire({
